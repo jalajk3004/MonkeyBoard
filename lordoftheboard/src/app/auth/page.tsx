@@ -31,6 +31,8 @@ const Auth = () => {
             }
 
             const json = await response.json();
+            sessionStorage.setItem('token', json.token); // Save the token
+            sessionStorage.setItem('username', credential.username);// Save the username
             toast.success('Account Created!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -117,6 +119,7 @@ const Auth = () => {
     };
     return (
         <div className="relative flex h-screen w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+            <ToastContainer />
             {/* Circle Background */}
             <div
                 className={`absolute h-[200%] w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 transition-transform duration-700 ease-in-out

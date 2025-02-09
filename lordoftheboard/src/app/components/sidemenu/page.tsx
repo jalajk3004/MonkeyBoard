@@ -51,59 +51,20 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const [username, setUsername] = useState<string | null>(null);
   const { state } = useSidebar();
   const router = useRouter();
+  const [username, setUsername] = useState<string | null>(null);
+  
 
-  useEffect(() => {
-    const storedUsername = sessionStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    } else {
-      const fetchUser = async () => {
-        const token = sessionStorage.getItem("token");
-        if (!token) {
-          router.push("/auth");
-          return;
-        }
-
-        try {
-          const response = await fetch("http://localhost:3000/api/auth/getuser", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": token,
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to fetch user data");
-          }
-
-          const data = await response.json();
-          setUsername(data.username);
-        } catch (error) {
-          console.error("Error fetching user:", error);
-          sessionStorage.removeItem("token");
-          sessionStorage.removeItem("username");
-          router.push("/auth");
-        }
-      };
-
-      fetchUser();
-    }
-  }, [router]);
-
-  if (!username) {
-    return null; // Hide Sidebar if the user is not logged in
-  }
-
-  const signOut = () => {
-    sessionStorage.clear();
-    setUsername(null); // Ensure state updates
-    router.replace("/auth");
+  const handleLogout = () => {
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("token");
+    router.push("/auth"); // Redirect to login page
   };
-
+  useEffect(() => {
+  const storedUsername = sessionStorage.getItem('username');
+  setUsername(storedUsername);
+  }, [router]);
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className={state === "collapsed" ? "hidden" : ""}>
@@ -145,7 +106,7 @@ export function AppSidebar() {
                   <span>Account</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <button onClick={signOut}>
+                  <button onClick={handleLogout}>
                     Sign out
                   </button>
                 </DropdownMenuItem>
