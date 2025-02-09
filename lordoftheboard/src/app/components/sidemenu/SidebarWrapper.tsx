@@ -15,11 +15,13 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarProvider>
+        <div className="grid grid-cols-[auto,1fr] w-full ">
       {!shouldHideSidebar && <AppSidebar />}
-      <main className="w-full min-h-screen flex ">
+      <main className="w-full min-h-screen flex overflow-auto  ">
         {!shouldHideSidebar && <SidebarTrigger />}
         {children}  
       </main>
+      </div>
     </SidebarProvider>
   );
 }

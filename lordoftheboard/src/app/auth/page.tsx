@@ -46,7 +46,7 @@ const Auth = () => {
             });
             console.log(json);
             setTimeout(() => {
-                router.push('/');
+                router.push(`/${credential.username}`);
             }, 1000);
         } catch (error) {
             toast.error('Fill all the fields correctly!', {
@@ -99,7 +99,7 @@ const Auth = () => {
             });
 
             setTimeout(() => {
-                router.push('/'); 
+                router.push(`/${credential.username}`); 
             }, 1000);
 
         } catch (error) {

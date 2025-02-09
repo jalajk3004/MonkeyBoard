@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Calendar,
-  ChevronUp,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  User2,
-} from "lucide-react";
+import { ChevronUp, Home, Search, User2 } from "lucide-react";
 
 import {
   Sidebar,
@@ -16,7 +8,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -28,8 +19,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -54,30 +43,31 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const router = useRouter();
   const [username, setUsername] = useState<string | null>(null);
-  
+
+  useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    setUsername(storedUsername);
+  }, [router]);
 
   const handleLogout = () => {
     sessionStorage.clear();
-    router.replace("/auth"); // Redirect to login page
+    router.replace("/auth");
   };
-  useEffect(() => {
-  const storedUsername = sessionStorage.getItem('username');
-  setUsername(storedUsername);
-  }, [router]);
+
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className={state === "collapsed" ? "hidden" : ""}>
+    <Sidebar collapsible="icon" variant="sidebar">
+      <SidebarHeader className={`${state === "collapsed" ? "hidden" : ""}`}>
         Lord Of The Board
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
+          <SidebarGroupContent >
+            <SidebarMenu >
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="w-full">
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
+                    <a href={item.url} className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 transition">
+                      <item.icon className="w-5 h-5" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -87,27 +77,21 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="px-2 py-2 border-t">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 /> {username}
-                  <ChevronUp className="ml-auto" />
+                <SidebarMenuButton className="flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100 transition">
+                  <User2 className="w-5 h-5" />
+                  <span>{username}</span>
+                  <ChevronUp className="ml-auto w-4 h-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                side="top"
-                className="w-[--radix-popper-anchor-width]"
-              >
-                <DropdownMenuItem>
-                  <span>Account</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>
-                  <button >
-                    Sign out
-                  </button>
+              <DropdownMenuContent side="top" align="end" className="w-44">
+                <DropdownMenuItem>Account</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout} className="text-red-600 hover:bg-red-100">
+                  Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
