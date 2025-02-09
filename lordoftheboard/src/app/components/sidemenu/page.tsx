@@ -57,9 +57,8 @@ export function AppSidebar() {
   
 
   const handleLogout = () => {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("token");
-    router.push("/auth"); // Redirect to login page
+    sessionStorage.clear();
+    router.replace("/auth"); // Redirect to login page
   };
   useEffect(() => {
   const storedUsername = sessionStorage.getItem('username');
@@ -105,8 +104,8 @@ export function AppSidebar() {
                 <DropdownMenuItem>
                   <span>Account</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <button onClick={handleLogout}>
+                <DropdownMenuItem onClick={handleLogout}>
+                  <button >
                     Sign out
                   </button>
                 </DropdownMenuItem>

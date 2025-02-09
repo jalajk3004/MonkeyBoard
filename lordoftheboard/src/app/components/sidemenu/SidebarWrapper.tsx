@@ -16,7 +16,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       {!shouldHideSidebar && <AppSidebar />}
-      <main className="w-full min-h-screen flex m-1">
+      <main className="w-full min-h-screen flex ">
         {!shouldHideSidebar && <SidebarTrigger />}
         {children}  
       </main>
