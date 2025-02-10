@@ -6,6 +6,7 @@ import AnimatedHeader from "../components/animatedheading/page";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
+import CreateWorkspace from "../components/whiteboard/createworkspace";
 
 interface PageProps {
   params: { slug: string };
@@ -52,13 +53,13 @@ const Page: FC<PageProps> = ({ params }) => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Welcome to <span className="font-bold text-zinc-900">Lord Of The Board</span>, a dynamic space where creativity and collaboration meet in real-time! Our interactive whiteboard allows users to draw, sketch, and brainstorm together seamlessly, no matter where they are. Whether you&apos;re working on a project, planning ideas, or simply having fun, our platform offers smooth, instant collaboration with multiple participants. Join in and bring your ideas to life, together, in a shared virtual canvas.
                 </p>
-                <motion.button onClick={handleJoinRoom}
-                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                <motion.div onClick={handleJoinRoom}
+                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 w-1/2 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Create Your WorkSpace!
-                </motion.button>
+                  <CreateWorkspace  />
+                </motion.div>
               </motion.div>
 
               {/* Video Section */}

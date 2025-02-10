@@ -1,24 +1,34 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Stage, Layer, Line } from "react-konva";
 import { io } from "socket.io-client";
 
-const socket = io();
+// ✅ Ensure it connects to the correct WebSocket server
+const socket = io("http://localhost:3000");
 
 const Canvas = ({ roomId }: { roomId: string }) => {
   const [lines, setLines] = useState<any[]>([]);
+  const [username, setUsername] = useState<string | null>(null);
+  const isDrawing = useRef(false);
 
   useEffect(() => {
-    if (!roomId) return; // Ensure roomId exists
+    const storedUsername = sessionStorage.getItem("username") || "Guest";
+    setUsername(storedUsername);
 
-    console.log(`Joining room: ${roomId}`);
-    socket.emit("joinRoom", roomId);
+    if (!roomId) return;
+
+    socket.emit("joinRoom", { roomId, username: storedUsername });
+
+    socket.on("userJoined", ({ username, roomId }) => {
+      console.log(`Joining ${username}: ${roomId}`);
+    });
 
     socket.on("draw", (data) => {
       setLines((prevLines) => [...prevLines, data.line]);
     });
 
     return () => {
+      socket.off("userJoined");
       socket.off("draw");
     };
   }, [roomId]);

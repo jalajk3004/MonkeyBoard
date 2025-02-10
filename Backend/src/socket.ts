@@ -1,34 +1,43 @@
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
+// import { createServer } from "http";
+// import express from "express";
+// import cors from "cors";
 
-export default function handler(req: any, res: any) {
-  if (!res.socket.server.io) {
-    console.log("Initializing WebSocket server...");
-    const io = new Server(res.socket.server, {
-      path: "/api/socket",
-      cors: {
-        origin: "*", // Allow all origins (change as needed)
-        methods: ["GET", "POST"],
-      },
-    });
-    res.socket.server.io = io;
+// const app = express();
+// app.use(cors());
+// const server = createServer(app);
 
-    io.on("connection", (socket) => {
-      console.log("A user connected");
+// let io: Server | null = null;
 
-      socket.on("joinRoom", (roomId: string) => {
-        socket.join(roomId);
-        console.log(`User joined room: ${roomId}`);
-      });
+// app.get("/start-socket", (req, res) => {
+//   if (!io) {
+//     console.log("Initializing WebSocket server...");
+//     io = new Server(server, {
+//       cors: { origin: "*", methods: ["GET", "POST"] },
+//     });
 
-      socket.on("draw", (data) => {
-        socket.to(data.roomId).emit("draw", data);
-      });
+//     io.on("connection", (socket) => {
+//       console.log("A user connected:", socket.id);
 
-      socket.on("disconnect", () => {
-        console.log("A user disconnected");
-      });
-    });
-    
-  }
-  res.end();
-}
+//       socket.on("joinRoom", ({ roomId, username }) => {
+//         socket.join(roomId);
+//         console.log(`Joining ${username}: ${roomId}`);
+//         io?.to(roomId).emit("userJoined", { username, roomId });
+//       });
+
+//       socket.on("draw", (data) => {
+//         socket.to(data.roomId).emit("draw", data);
+//       });
+
+//       socket.on("disconnect", () => {
+//         console.log("A user disconnected:", socket.id);
+//       });
+//     });
+
+//     res.send({ message: "WebSocket Server Started!" });
+//   } else {
+//     res.send({ message: "WebSocket Server Already Running!" });
+//   }
+// });
+
+// export { server };
