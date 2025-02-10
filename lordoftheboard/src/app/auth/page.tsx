@@ -9,6 +9,7 @@ const Auth = () => {
     const router = useRouter();
     const [isLogin, setIsLogin] = useState(false);
     const [credential, setCredential] = useState({ username: '', email: '', password: '' });
+    
 
     const toggleForm = () => {
         setIsLogin(!isLogin);
@@ -118,7 +119,7 @@ const Auth = () => {
         }
     };
     return (
-        <div className="relative flex h-screen w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="absolute flex h-screen w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
             <ToastContainer />
             {/* Circle Background */}
             <div
