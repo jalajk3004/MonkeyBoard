@@ -1,15 +1,27 @@
 "use client";
 import Image from "next/image";
 import { AppSidebar } from "../components/sidemenu/page";
-import { FC } from "react";
+import { FC, useState } from "react";
 import AnimatedHeader from "../components/animatedheading/page";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 interface PageProps {
   params: { slug: string };
 }
 
+
 const Page: FC<PageProps> = ({ params }) => {
+  const [roomId, setRoomId] = useState("");
+  const router = useRouter();
+  
+  
+  const handleJoinRoom = () => {
+      const roomId = uuidv4(); 
+      router.push(`/workspace/${roomId}`);
+  };
+
   return (
     <div className=" min-h-screen">
       {/* Sidebar */}
@@ -40,7 +52,7 @@ const Page: FC<PageProps> = ({ params }) => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Welcome to <span className="font-bold text-zinc-900">Lord Of The Board</span>, a dynamic space where creativity and collaboration meet in real-time! Our interactive whiteboard allows users to draw, sketch, and brainstorm together seamlessly, no matter where they are. Whether you&apos;re working on a project, planning ideas, or simply having fun, our platform offers smooth, instant collaboration with multiple participants. Join in and bring your ideas to life, together, in a shared virtual canvas.
                 </p>
-                <motion.button 
+                <motion.button onClick={handleJoinRoom}
                   className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -83,6 +95,7 @@ const Page: FC<PageProps> = ({ params }) => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
           >
             Your Work
+            <button></button>
           </motion.h2>
           {/* Add your work section content here */}
         </section>
