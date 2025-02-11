@@ -20,10 +20,7 @@ const Page: FC<PageProps> = ({ params }) => {
   const router = useRouter();
   
   
-  const handleJoinRoom = () => {
-      const roomId = uuidv4(); 
-      router.push(`/workspace/${roomId}`);
-  };
+
 
   return (
     <div className=" min-h-screen">
@@ -55,7 +52,7 @@ const Page: FC<PageProps> = ({ params }) => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Welcome to <span className="font-bold text-zinc-900">Lord Of The Board</span>, a dynamic space where creativity and collaboration meet in real-time! Our interactive whiteboard allows users to draw, sketch, and brainstorm together seamlessly, no matter where they are. Whether you&apos;re working on a project, planning ideas, or simply having fun, our platform offers smooth, instant collaboration with multiple participants. Join in and bring your ideas to life, together, in a shared virtual canvas.
                 </p>
-                <motion.div onClick={handleJoinRoom}
+                <motion.div 
                   className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 w-1/2 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}

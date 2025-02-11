@@ -31,28 +31,7 @@ interface CardData {
     };
   
     // Add a Card
-    const addCard = async () => {
-      const token = sessionStorage.getItem("token");
-      if (!token) return alert("No token found, please log in!");
-      if (!title) return alert("Title cannot be empty!");
-  
-      try {
-        const response = await fetch("http://localhost:3000/api/data/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            token: token,
-          },
-          body: JSON.stringify({ title }),
-        });
-  
-        const data = await response.json();
-        setCards([...cards, data.data]); // Add new card to the state
-        setTitle(""); // Clear input field
-      } catch (error) {
-        console.error("Error adding card:", error);
-      }
-    };
+    
   
     // Delete a Card
     const deleteCard = async (id: string) => {
