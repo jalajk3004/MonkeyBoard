@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; 
 import { AppSidebar } from "./components/sidemenu/page";
 import AnimatedHeader from "./components/animatedheading/page";
+import Footer from "./components/footer/page";
 
 const Page = () => {
   const router = useRouter();
@@ -93,6 +94,7 @@ const Page = () => {
                 </div>
               </motion.div>
             </div>
+            <Footer/>
           </div>
         </header>
       </div>

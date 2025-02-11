@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import CreateWorkspace from "../components/whiteboard/createworkspace";
+import YourWork from "../components/yourwork/page";
+import Footer from "../components/footer/page";
 
 interface PageProps {
   params: { slug: string };
@@ -87,7 +89,9 @@ const Page: FC<PageProps> = ({ params }) => {
           </div>
         </header>
         
-       
+        {/* Work Section */}
+        <YourWork />
+      <Footer/>
       </div>
     </div>
   );

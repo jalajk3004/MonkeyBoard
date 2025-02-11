@@ -41,6 +41,17 @@ dataRouter.post('/add', [
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
+//GET All Data Route
+dataRouter.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield db_1.default.data.findMany();
+        res.status(200).json(data);
+    }
+    catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
 // Delete Data Route
 dataRouter.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
