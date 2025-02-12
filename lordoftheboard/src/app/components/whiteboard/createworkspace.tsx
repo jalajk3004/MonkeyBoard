@@ -33,16 +33,22 @@ const CreateWorkspace = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          token: token,
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ 
+          title,
+          userId: token }),
       });
+      if (!response.ok) {
+        throw new Error('Failed to create workspace');
+      }
 
       const data = await response.json();
-      setCards([...cards, data.data]); // Add new card to the state
       setTitle(""); // Clear input field
+      router.refresh(); // Refresh the page to show new data
     } catch (error) {
       console.error("Error adding card:", error);
+      alert("Failed to create workspace. Please try again.");
     }
   };
 
@@ -62,7 +68,7 @@ const CreateWorkspace = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Write A Title</DialogTitle>
-          <DialogDescription>
+          
           <div className="p-1 m-1">
           <input
             value={title}
@@ -71,7 +77,6 @@ const CreateWorkspace = () => {
             className="w-full h-auto p-2 border border-gray-300 rounded-lg"
           />
         </div>
-          </DialogDescription>
           <DialogTrigger onClick={handleButtonClick} className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-4 w-full rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">Create</DialogTrigger>
         </DialogHeader>
       </DialogContent>

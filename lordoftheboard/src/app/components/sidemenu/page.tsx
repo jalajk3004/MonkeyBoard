@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronUp, Home, Search, User2 } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -25,34 +24,35 @@ import {
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-];
-
 export function AppSidebar() {
   const { state } = useSidebar();
   const router = useRouter();
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedUsername = sessionStorage.getItem("username");
-    setUsername(storedUsername);
-  }, [router]);
+    if (typeof window !== "undefined") {
+      const storedUsername = sessionStorage.getItem("username");
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.clear();
     router.replace("/auth");
   };
+
+  const items = [
+    {
+      title: "Home",
+      url: `/${username}`, // Avoid using undefined in URL
+      icon: Home,
+    },
+    {
+      title: "Search",
+      url: "#",
+      icon: Search,
+    },
+  ];
 
   return (
     <Sidebar collapsible="icon" variant="sidebar">
@@ -61,12 +61,15 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupContent >
-            <SidebarMenu >
+          <SidebarGroupContent>
+            <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title} className="w-full">
                   <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 transition">
+                    <a
+                      href={item.url}
+                      className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 transition"
+                    >
                       <item.icon className="w-5 h-5" />
                       <span>{item.title}</span>
                     </a>
@@ -84,13 +87,16 @@ export function AppSidebar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton className="flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100 transition">
                   <User2 className="w-5 h-5" />
-                  <span>{username}</span>
+                  <span>{username || "Guest"}</span>
                   <ChevronUp className="ml-auto w-4 h-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent side="top" align="end" className="w-44">
                 <DropdownMenuItem>Account</DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600 hover:bg-red-100">
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="text-red-600 hover:bg-red-100"
+                >
                   Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
