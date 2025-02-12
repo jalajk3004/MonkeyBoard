@@ -25,7 +25,7 @@ const YourWork = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          "auth-token": `Bearer ${token}`,
         },
       });
 
@@ -72,10 +72,8 @@ const YourWork = () => {
         <div className="flex flex-wrap gap-4 px-4">
           {cards.map((card) => (
             <Card 
-              key={card.id} 
-              id={card.id} 
-              title={card.title}
-              userId={card.userId}
+              key={card.id}
+              cardData={card}
             />
           ))}
         </div>

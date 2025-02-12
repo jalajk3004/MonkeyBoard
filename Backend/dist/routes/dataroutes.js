@@ -16,10 +16,11 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const db_1 = __importDefault(require("../db"));
 const express_validator_1 = require("express-validator");
+const fetchUser_1 = __importDefault(require("../middleware/fetchUser"));
 dotenv_1.default.config();
 const dataRouter = express_1.default.Router();
 // Add Data Route
-dataRouter.post('/add', [
+dataRouter.post('/add', fetchUser_1.default, [
     (0, express_validator_1.body)('title').isString().isLength({ min: 3 }).withMessage('Title must be at least 3 characters long'),
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Check for validation errors
@@ -42,7 +43,7 @@ dataRouter.post('/add', [
     }
 }));
 //GET All Data Route
-dataRouter.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+dataRouter.get('/all', fetchUser_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield db_1.default.data.findMany();
         res.status(200).json(data);
@@ -53,7 +54,7 @@ dataRouter.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 }));
 // Delete Data Route
-dataRouter.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+dataRouter.delete('/delete/:id', fetchUser_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
         const data = yield db_1.default.data.delete({

@@ -1,24 +1,25 @@
 "use client";
 import React from "react";
 
-interface CardProps {
-  id: string;
-  title: string;
-  userId: string;
+type CardProps = {
+  cardData: {
+    id: string;
+    title: string;
+    userId: string;
+  };
+};
 
-}
-
-const Card: React.FC<CardProps> = ({ id, title }) => {
+const Card = ({ cardData }: CardProps) => {
   const handleDelete = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) return alert("No token found, please log in!");
 
     try {
-      const response = await fetch(`http://localhost:3000/api/data/delete/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/data/delete/${cardData.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          "auth-token": `Bearer ${token}`,
         },
       });
 
@@ -26,7 +27,7 @@ const Card: React.FC<CardProps> = ({ id, title }) => {
         throw new Error('Failed to delete workspace');
       }
 
-      window.location.reload();
+      // The parent component will automatically refresh due to polling
     } catch (error) {
       console.error("Error deleting card:", error);
       alert("Failed to delete workspace. Please try again.");
@@ -41,7 +42,7 @@ const Card: React.FC<CardProps> = ({ id, title }) => {
           alt="Card Image"
         />
       </div>
-      <h1 className="text-3xl font-bold mt-2 px-2">{title}</h1>
+      <h1 className="text-3xl font-bold mt-2 px-2">{cardData.title}</h1>
       <div className="flex flex-row items-center justify-between">
         <button className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 w-1/2 m-2 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
           Continue...

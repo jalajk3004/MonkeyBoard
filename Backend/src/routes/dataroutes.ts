@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import prisma from '../db';
 import { body, validationResult } from 'express-validator';
+import fetchUser from '../middleware/fetchUser';
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ const dataRouter = express.Router();
 
 // Add Data Route
 dataRouter.post(
-    '/add',
+    '/add', fetchUser,
     [
         body('title').isString().isLength({ min: 3 }).withMessage('Title must be at least 3 characters long'),
     ],
@@ -22,12 +23,11 @@ dataRouter.post(
 
         try {
             const { title } = req.body;
-
+            
             const data = await prisma.data.create({
                 data: {
-                    title,
-                    
-                },
+                    title, 
+                },  
             });
 
             res.status(201).json({ message: 'Data added successfully', data });
@@ -39,7 +39,7 @@ dataRouter.post(
 );
 
 //GET All Data Route
-dataRouter.get('/all', async (req, res) => {
+dataRouter.get('/all',fetchUser, async (req, res) => {
     try {
         const data = await prisma.data.findMany();
         res.status(200).json(data);
@@ -50,7 +50,7 @@ dataRouter.get('/all', async (req, res) => {
 });
 
 // Delete Data Route
-dataRouter.delete('/delete/:id', async (req, res) => {
+dataRouter.delete('/delete/:id',fetchUser, async (req, res) => {
     try {
         const { id } = req.params;
 

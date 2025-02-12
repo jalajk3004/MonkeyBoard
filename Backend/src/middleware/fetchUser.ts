@@ -22,15 +22,12 @@ const fetchUser = (req: CustomRequest, res: Response, next: NextFunction): void 
     return;
   }
 
-  console.log('Received Token:', token);  // Log the token received
 
   try {
     const data = jwt.verify(token, JWT_SECRET) as DecodedToken;
     req.user = data.user;
-    console.log('User extracted from token:', req.user);  // Log to check user data
     next();
   } catch (error) {
-    console.error('Token verification failed:', error);  // Log the error
     res.status(401).json({ error: 'Invalid token' });
     return;
   }
