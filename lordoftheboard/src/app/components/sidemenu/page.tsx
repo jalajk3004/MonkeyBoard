@@ -55,7 +55,7 @@ export function AppSidebar() {
   ];
 
   return (
-    <Sidebar collapsible="icon" variant="sidebar">
+    <Sidebar collapsible="icon" variant="sidebar" >
       <SidebarHeader className={`${state === "collapsed" ? "hidden" : ""}`}>
         Lord Of The Board
       </SidebarHeader>
