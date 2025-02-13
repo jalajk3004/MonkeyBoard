@@ -23,6 +23,7 @@ model Data {  // Renamed from 'data' to 'Data'
   title     String
   img       String?
   userId    String
+  url       String
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

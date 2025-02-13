@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 const CreateWorkspace = () => {
   const router = useRouter();
@@ -33,12 +34,28 @@ const CreateWorkspace = () => {
         throw new Error("Failed to create workspace");
       }
 
+
       const data = await response.json();
+      toast.success('Workspace Created!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    
+      setTimeout(() => {
+      
+      router.push(data.url);
+    
+    }, 1000);
       setTitle("");
 
       // Use the workspace ID from backend response if available
-      const roomId =uuidv4(); // Fallback to uuid if not provided
-      router.push(`/workspace/${roomId}`);
     } catch (error) {
       console.error("Error adding card:", error);
       alert("Failed to create workspace. Please try again.");
@@ -47,6 +64,7 @@ const CreateWorkspace = () => {
 
   return (
     <Dialog>
+    <ToastContainer />
       <DialogTrigger>Create your Workspace</DialogTrigger>
       <DialogContent>
         <DialogHeader>

@@ -7,6 +7,7 @@ type CardData = {
   id: string;
   title: string;
   userId: string;
+  url: string;
 };
 
 const YourWork = () => {

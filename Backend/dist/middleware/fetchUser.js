@@ -9,9 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'XiaoLongBao';
 // Middleware to fetch user from JWT
 const fetchUser = (req, res, next) => {
     const token = req.header('auth-token');
-    console.log('Received Token:', token);
     if (!token) {
-        console.log('No token provided');
         res.status(401).json({ error: "Please authenticate using a valid token" });
         return;
     }
