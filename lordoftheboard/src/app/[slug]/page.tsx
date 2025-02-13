@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import CreateWorkspace from "../components/whiteboard/createworkspace";
 import YourWork from "../components/yourwork/page";
 import Footer from "../components/footer/page";
+import JoinWorkspace from "../components/whiteboard/joinworkspace";
 
 interface PageProps {
   params: { slug: string };
@@ -52,13 +53,24 @@ const Page: FC<PageProps> = ({ params }) => {
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Welcome to <span className="font-bold text-zinc-900">Lord Of The Board</span>, a dynamic space where creativity and collaboration meet in real-time! Our interactive whiteboard allows users to draw, sketch, and brainstorm together seamlessly, no matter where they are. Whether you&apos;re working on a project, planning ideas, or simply having fun, our platform offers smooth, instant collaboration with multiple participants. Join in and bring your ideas to life, together, in a shared virtual canvas.
                 </p>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-4">
+
                 <motion.div 
-                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 w-1/2 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 w-full rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                >
+                  >
                   <CreateWorkspace  />
                 </motion.div>
+                <motion.div 
+                  className="bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 w-full rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  >
+                  <JoinWorkspace/>
+                </motion.div>
+                  </div>
               </motion.div>
 
               {/* Video Section */}
@@ -86,7 +98,7 @@ const Page: FC<PageProps> = ({ params }) => {
           </div>
         </header>
         
-        {/* Work Section */}
+        
         <YourWork />
       <Footer/>
       </div>

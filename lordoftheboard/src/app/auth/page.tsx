@@ -32,7 +32,7 @@ const Auth = () => {
             }
 
             const json = await response.json();
-            sessionStorage.setItem('token', json.token); // Save the token
+            
             sessionStorage.setItem('username', credential.username);// Save the username
             toast.success('Account Created!', {
                 position: "top-right",
@@ -47,7 +47,7 @@ const Auth = () => {
             });
             console.log(json);
             setTimeout(() => {
-                router.push(`/${credential.username}`);
+                
             }, 1000);
         } catch (error) {
             toast.error('Fill all the fields correctly!', {

@@ -18,7 +18,7 @@ const CreateWorkspace = () => {
   const addCard = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) return alert("No token found, please log in!");
-    if (!title.trim()) return alert("Title cannot be empty!");
+    // if (!title.trim()) return alert("Title cannot be empty!");
 
     try {
       const response = await fetch("http://localhost:3000/api/data/add", {
