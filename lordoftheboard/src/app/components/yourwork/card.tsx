@@ -2,6 +2,8 @@
 import router from "next/router";
 import React from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
+
 
 type CardProps = {
   cardData: {
@@ -14,8 +16,9 @@ type CardProps = {
 };
 
 const Card = ({ cardData, onDelete }: CardProps) => {
+  const router = useRouter();
 
-  const handlesame = async () => {
+  const handlesame = () => {
     try {
       router.push(cardData.url);
     } catch (error) {
@@ -23,6 +26,7 @@ const Card = ({ cardData, onDelete }: CardProps) => {
       alert("Failed to navigate. Please try again.");
     }
   };
+  
   
 
   const handleDelete = async () => {
