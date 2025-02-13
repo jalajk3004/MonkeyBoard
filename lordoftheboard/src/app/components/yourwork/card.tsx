@@ -7,9 +7,10 @@ type CardProps = {
     title: string;
     userId: string;
   };
+  onDelete: (id: string) => void; // Function passed from the parent
 };
 
-const Card = ({ cardData }: CardProps) => {
+const Card = ({ cardData, onDelete }: CardProps) => {
   const handleDelete = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) return alert("No token found, please log in!");
@@ -19,15 +20,16 @@ const Card = ({ cardData }: CardProps) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${token}`,
+          "auth-token": token,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete workspace');
+        throw new Error("Failed to delete workspace");
       }
 
-      // The parent component will automatically refresh due to polling
+      // Remove the deleted card from UI
+      onDelete(cardData.id);
     } catch (error) {
       console.error("Error deleting card:", error);
       alert("Failed to delete workspace. Please try again.");
@@ -42,7 +44,7 @@ const Card = ({ cardData }: CardProps) => {
           alt="Card Image"
         />
       </div>
-      <h1 className="text-3xl font-bold mt-2 px-2">{cardData.title}</h1>
+      <h1 className="text-xl font-bold mt-2 px-2">{cardData.title}</h1>
       <div className="flex flex-row items-center justify-between">
         <button className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 w-1/2 m-2 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
           Continue...

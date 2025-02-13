@@ -4,21 +4,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+// Get JWT secret from environment variable or use default
+const JWT_SECRET = process.env.JWT_SECRET || 'XiaoLongBao';
+// Middleware to fetch user from JWT
 const fetchUser = (req, res, next) => {
     const token = req.header('auth-token');
+    console.log('Received Token:', token);
     if (!token) {
-        res.status(401).json({ error: 'Please authenticate using a valid token' });
+        console.log('No token provided');
+        res.status(401).json({ error: "Please authenticate using a valid token" });
         return;
     }
     try {
-        const data = jsonwebtoken_1.default.verify(token, JWT_SECRET);
-        req.user = data.user;
+        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+        req.user = decoded; // ✅ Now TypeScript recognizes this
         next();
     }
     catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
-        return;
+        res.status(401).json({ error: "Invalid or expired token" });
     }
 };
 exports.default = fetchUser;

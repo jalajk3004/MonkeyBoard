@@ -1,13 +1,13 @@
 "use client";
-import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./card";
 
-interface CardData {
+
+type CardData = {
   id: string;
   title: string;
   userId: string;
-}
+};
 
 const YourWork = () => {
   const [cards, setCards] = useState<CardData[]>([]);
@@ -25,18 +25,16 @@ const YourWork = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${token}`,
+          "auth-token": token,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch workspaces');
+        throw new Error("Failed to fetch workspaces");
       }
 
       const data = await response.json();
-      // Filter cards to only show the logged-in user's cards
-      const userCards = data.filter((card: CardData) => card.userId === token);
-      setCards(userCards);
+      setCards(data);
     } catch (error) {
       console.error("Error fetching cards:", error);
       alert("Failed to fetch workspaces. Please try again.");
@@ -49,32 +47,27 @@ const YourWork = () => {
     getCards();
   }, []);
 
+  // Function to remove a deleted card from the UI
+  const handleDelete = (id: string) => {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+  };
+
   return (
     <div>
       <section className="px-4 m-10 lg:px-16 py-8">
-        <motion.h2
-          className="text-3xl font-bold text-zinc-800 mb-8 flex flex-row justify-between"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-        >
-          Your Work
-        </motion.h2>
+        <h2 className="text-3xl font-bold text-zinc-800 mb-8">Your Work</h2>
       </section>
 
       {loading ? (
         <p>Loading...</p>
       ) : cards.length === 0 ? (
         <div className="flex flex-col items-center justify-center">
-          <p>Progress is yet to begin</p>
+          <p>No workspaces found. Start by creating one!</p>
         </div>
       ) : (
         <div className="flex flex-wrap gap-4 px-4">
           {cards.map((card) => (
-            <Card 
-              key={card.id}
-              cardData={card}
-            />
+            <Card key={card.id} cardData={card} onDelete={handleDelete} />
           ))}
         </div>
       )}

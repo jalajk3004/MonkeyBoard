@@ -5,6 +5,7 @@ import express, { Request, Response } from 'express';
   import bcrypt from 'bcrypt';
   import jwt from 'jsonwebtoken';
   import dotenv from 'dotenv';
+  const JWT_SECRET = process.env.JWT_SECRET || 'XiaoLongBao';
 
   dotenv.config();
 
@@ -88,19 +89,22 @@ userRouter.post(
 
       // Generate JWT Token
       const token = jwt.sign(
-        { userId: user.id, username: user.username },
-        process.env.JWT_SECRET || 'default_secret',
-        { expiresIn: '1h' }
+        { id: user.id, username: user.username },
+        JWT_SECRET,  
+        { expiresIn: '24h' }
       );
 
-      res.status(200).json({ message: 'User logged in successfully', token, username: user.username });
+      res.status(200).json({ 
+        success: true,
+        token,
+        username: user.username 
+      });
     } catch (error) {
       console.error('Error logging in user:', error);
-      res.status(500).send('Internal server error');
+      res.status(500).json({ error: 'Internal server error' });
     }
   }
 );
-
 // Get User Route
 userRouter.post('/getuser', fetchUser, async (req: any, res: any) => {
   try {

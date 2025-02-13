@@ -17,32 +17,27 @@ const CreateWorkspace = () => {
   const addCard = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) return alert("No token found, please log in!");
-    if (!title) return alert("Title cannot be empty!");
-  
+    if (!title.trim()) return alert("Title cannot be empty!");
+
     try {
-     
-  
       const response = await fetch("http://localhost:3000/api/data/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": `Bearer ${token}`,
+          "auth-token": token, // Fixed token format
         },
-        body: JSON.stringify({ 
-          title,
-          token 
-        }),
+        body: JSON.stringify({ title }),
       });
-      
+
       if (!response.ok) {
-        throw new Error('Failed to create workspace');
+        throw new Error("Failed to create workspace");
       }
-  
+
       const data = await response.json();
       setTitle("");
-      
-      // Navigate to the new workspace
-      const roomId = uuidv4();
+
+      // Use the workspace ID from backend response if available
+      const roomId =uuidv4(); // Fallback to uuid if not provided
       router.push(`/workspace/${roomId}`);
     } catch (error) {
       console.error("Error adding card:", error);
@@ -64,7 +59,7 @@ const CreateWorkspace = () => {
               className="w-full h-auto p-2 border border-gray-300 rounded-lg"
             />
           </div>
-          <button 
+          <button
             onClick={addCard}
             className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-4 w-full rounded-xl font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >

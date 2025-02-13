@@ -23,48 +23,69 @@ const dataRouter = express_1.default.Router();
 dataRouter.post('/add', fetchUser_1.default, [
     (0, express_validator_1.body)('title').isString().isLength({ min: 3 }).withMessage('Title must be at least 3 characters long'),
 ], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // Check for validation errors
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
+        if (!req.user) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid user' });
+        }
         const { title } = req.body;
-        const data = yield db_1.default.data.create({
+        const newData = yield db_1.default.data.create({
             data: {
                 title,
+                userId: req.user.id, // ✅ Fix here
             },
         });
-        res.status(201).json({ message: 'Data added successfully', data });
+        return res.status(201).json(newData);
     }
     catch (error) {
         console.error('Error adding data:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Failed to create data' });
     }
 }));
-//GET All Data Route
+// GET All Data Route
 dataRouter.get('/all', fetchUser_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const data = yield db_1.default.data.findMany();
-        res.status(200).json(data);
+        const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.id; // Fetch user ID from middleware
+        const user = yield db_1.default.user.findUnique({
+            where: { id: userId },
+        });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const dataEntries = yield db_1.default.data.findMany({
+            where: { userId: user.id },
+        });
+        return res.status(200).json(dataEntries);
     }
     catch (error) {
         console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Failed to fetch data' });
     }
 }));
 // Delete Data Route
 dataRouter.delete('/delete/:id', fetchUser_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const data = yield db_1.default.data.delete({
+        // Ensure the data entry exists
+        const data = yield db_1.default.data.findUnique({
             where: { id },
         });
-        res.status(200).json({ message: 'Data deleted successfully', data });
+        if (!data) {
+            return res.status(404).json({ error: 'Data not found' });
+        }
+        // Delete the data entry
+        const deletedData = yield db_1.default.data.delete({
+            where: { id },
+        });
+        return res.status(200).json({ message: 'Data deleted successfully', deletedData });
     }
     catch (error) {
         console.error('Error deleting data:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Internal server error' });
     }
 }));
 exports.default = dataRouter;

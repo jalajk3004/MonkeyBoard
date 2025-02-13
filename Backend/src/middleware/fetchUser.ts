@@ -1,35 +1,42 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+// Get JWT secret from environment variable or use default
+const JWT_SECRET = process.env.JWT_SECRET || 'XiaoLongBao';
 
-interface DecodedToken {
-  user: {
-    id: string;
-    username: string;
-  };
+interface JwtPayload {
+  id: string;
+  username: string;
 }
 
-interface CustomRequest extends Request {
-  user?: DecodedToken['user'];
+// Extend Express Request to include `user`
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: JwtPayload;
+  }
 }
 
-const fetchUser = (req: CustomRequest, res: Response, next: NextFunction): void => {
+// Middleware to fetch user from JWT
+const fetchUser = (req: Request, res: Response, next: NextFunction): void => {
   const token = req.header('auth-token');
+  console.log('Received Token:', token);
 
   if (!token) {
-    res.status(401).json({ error: 'Please authenticate using a valid token' });
+    console.log('No token provided');
+    res.status(401).json({ error: "Please authenticate using a valid token" });
     return;
   }
 
-
   try {
-    const data = jwt.verify(token, JWT_SECRET) as DecodedToken;
-    req.user = data.user;
+    
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    
+    req.user = decoded; // ✅ Now TypeScript recognizes this
+    
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
-    return;
+    
+    res.status(401).json({ error: "Invalid or expired token" });
   }
 };
 
