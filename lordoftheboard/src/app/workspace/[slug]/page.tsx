@@ -11,7 +11,7 @@ const Page: FC = () => {
   const params = useParams(); 
   return (
     <div >
-      <Canvas />
+      <Canvas roomId={""} />
     </div>
   );
 };
