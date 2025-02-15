@@ -12,6 +12,7 @@ const Cursors= ()=>{
             <Cursor
             key={connectionId}
             connectionId= {connectionId}
+            
             />
         ))}
         </>

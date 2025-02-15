@@ -28,6 +28,7 @@ export const Cursor=memo(({
             height={50}
             width={50}
             className="relative drop-shadow-sm">
+                
             <MousePointer2 
             className="h-5 w-5 "/>
             </foreignObject> 
