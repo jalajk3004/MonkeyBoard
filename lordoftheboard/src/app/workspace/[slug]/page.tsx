@@ -1,19 +1,29 @@
-"use client";
+    "use client";
 
-import dynamic from "next/dynamic";
-import { useParams } from "next/navigation";
-import { FC } from "react";
-import Canvas from "./components/canvas";
+    import dynamic from "next/dynamic";
+    import { useParams } from "next/navigation";
+    import { FC } from "react";
+    import Canvas from "./components/canvas";
+    import { Room } from "@/app/Room";
 
 
 
-const Page: FC = () => {
-  const params = useParams(); 
-  return (
-    <div >
-      <Canvas roomId={""} />
-    </div>
-  );
-};
+    interface BoardIdPage {
+      params:{
+        boardId:string
+      }
+    }
 
-export default Page;
+    const Page=({
+      params,
+    }:BoardIdPage)=>{ 
+      return (
+        <div >
+          <Room roomId={params.boardId}>
+            <Canvas boardId={params.boardId} />
+          </Room>
+        </div>
+      );
+    };
+
+    export default Page;

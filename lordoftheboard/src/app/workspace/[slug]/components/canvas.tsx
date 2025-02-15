@@ -7,10 +7,14 @@ import Participants from "./participants";
 import Toolbar from "./toolbar";
 
 interface CanvasProps {
-  roomId: string;
+  boardId: string;
 }
 
-const Canvas: React.FC<CanvasProps> = () => {
+const MAX_LAYERS=100
+
+const Canvas: React.FC<CanvasProps> = ({
+  boardId,
+}:CanvasProps) => {
   const [canvasState, setCanvasState] = useState<CanvasState>({ mode: CanvasMode.None });
 
 

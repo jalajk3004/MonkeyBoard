@@ -36,6 +36,8 @@ const CreateWorkspace = () => {
 
 
       const data = await response.json();
+      const boardId = data.boardId;
+      
       toast.success('Workspace Created!', {
         position: "top-right",
         autoClose: 5000,
@@ -50,7 +52,7 @@ const CreateWorkspace = () => {
     
       setTimeout(() => {
       
-      router.push(data.url);
+      router.push(`/workspace/${boardId}`);
     
     }, 1000);
       setTitle("");
