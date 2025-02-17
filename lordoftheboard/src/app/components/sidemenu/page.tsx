@@ -1,12 +1,13 @@
 "use client";
 
-import { ChevronUp, Home, Search, User2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Globe, Home, Search, User2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -23,6 +24,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -47,11 +49,11 @@ export function AppSidebar() {
       url: `/${username}`, // Avoid using undefined in URL
       icon: Home,
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
+    // {
+    //   title: "Work",
+    //   url: "#",
+    //   icon: Globe,
+    // },
   ];
 
   return (
@@ -77,6 +79,7 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
+            
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
