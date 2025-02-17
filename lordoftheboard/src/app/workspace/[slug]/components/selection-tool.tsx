@@ -31,7 +31,7 @@ export const SelectionTools = memo(
         const arr = liveLayerIds.toImmutable();
 
         for (let i = 0; i < arr.length; i++) {
-          if (selection.includes(arr[i])) {
+          if (selection && selection.includes(arr[i])) {
             indices.push(i);
           }
         }
@@ -52,7 +52,7 @@ export const SelectionTools = memo(
         const arr = liveLayerIds.toImmutable();
 
         for (let i = 0; i < arr.length; i++) {
-          if (selection.includes(arr[i])) {
+          if (selection && selection.includes(arr[i])) {
             indices.push(i);
           }
         }
@@ -72,7 +72,7 @@ export const SelectionTools = memo(
         const liveLayers = storage.get("layers");
         setLastUsedColor(fill);
 
-        selection.forEach((id) => {
+        selection?.forEach((id) => {
           liveLayers.get(id)?.set("fill", fill);
         });
       },

@@ -1,14 +1,14 @@
 import { Camera,Color, LayerType, PathLayer, Point, Side, XYWH } from "../../types/canvas";
 
-export function pointerEventToCanvasPoint(e: React.PointerEvent, camera: Camera) {
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-
+export const pointerEventToCanvasPoint = (
+    e: React.PointerEvent,
+    camera: Camera
+  ) => {
     return {
-        x: Math.round(e.clientX - rect.left) - camera.x,  
-        y: Math.round(e.clientY - rect.top) - camera.y,
+      x: Math.round(e.clientX) - camera.x,
+      y: Math.round(e.clientY) - camera.y,
     };
-}
-
+  };
 
 const COLORS = [
     "#DC2626",
