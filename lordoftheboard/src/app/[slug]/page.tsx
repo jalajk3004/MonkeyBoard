@@ -1,27 +1,18 @@
 "use client";
-import Image from "next/image";
+
 import { AppSidebar } from "../components/sidemenu/page";
-import { FC, useState } from "react";
 import AnimatedHeader from "../components/animatedheading/page";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from "uuid";
 import CreateWorkspace from "../components/whiteboard/createworkspace";
 import YourWork from "../components/yourwork/page";
 import Footer from "../components/footer/page";
 import JoinWorkspace from "../components/whiteboard/joinworkspace";
 
-interface PageProps {
-  params: { slug: string };
-}
 
 
-const Page: FC<PageProps> = ({ params }) => {
-  const [roomId, setRoomId] = useState("");
-  const router = useRouter();
-  
-  
-
+const Page=() => {
+ 
 
   return (
     <div className=" min-h-screen">

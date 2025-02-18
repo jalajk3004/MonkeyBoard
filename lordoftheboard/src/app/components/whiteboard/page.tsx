@@ -6,10 +6,8 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000");
 
 const Canvas = ({ roomId }: { roomId: string }) => {
-  const [lines, setLines] = useState<any[]>([]);
-  const [username, setUsername] = useState<string | null>(null);
-  const isDrawing = useRef(false);
 
+  const [username, setUsername] = useState<string | null>(null);
   useEffect(() => {
     const storedUsername = sessionStorage.getItem("username") || "Guest";
     setUsername(storedUsername);
@@ -23,7 +21,7 @@ const Canvas = ({ roomId }: { roomId: string }) => {
     });
 
     socket.on("draw", (data) => {
-      setLines((prevLines) => [...prevLines, data.line]);
+      
     });
 
     return () => {
