@@ -14,7 +14,6 @@ interface ToolButtonProps {
 }
 
 export const ToolButton = ({
-    label,
     icon: Icon,
     onClick,
     isActive,

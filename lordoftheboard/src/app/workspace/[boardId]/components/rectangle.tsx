@@ -16,7 +16,7 @@ export const Rectangle = ({
     console.log({
         id, layer
     })
-    const {x, y, width,height, fill} = layer;
+    const { width,height, fill} = layer;
     return(
         <rect 
         className="drop-shadow-md"

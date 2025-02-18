@@ -1,6 +1,6 @@
 import React from 'react'
 import { ToolButton } from './toolbutton'
-import { Circle, MousePointer, Pencil, RectangleHorizontal, Redo, Square, StickyNote, Type, Undo2Icon } from 'lucide-react'
+import { Circle, MousePointer, Pencil, RectangleHorizontal, Redo,  StickyNote, Type, Undo2Icon } from 'lucide-react'
 import { CanvasMode, CanvasState, LayerType } from '../../../../../types/canvas';
 
 

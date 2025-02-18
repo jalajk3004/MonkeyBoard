@@ -13,7 +13,6 @@ interface UserAvatarProps {
 };
 export const UserAvatar = ({
     src,
-    name,
     fallback,
     borderColor
 }: UserAvatarProps)=> {

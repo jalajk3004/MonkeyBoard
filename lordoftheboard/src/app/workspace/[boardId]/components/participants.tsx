@@ -13,7 +13,7 @@ const Participants = () => {
   return (
     <div className="absolute top-2 right-2 bg-white px-1.5 h-12 flex items-center rounded-md shadow-md">
       <div className="flex gap-x-2">
-        {users.slice(0, MAX_USERS).map(({ connectionId, info }) => (
+        {users.slice(0, MAX_USERS).map(({ connectionId }) => (
           <UserAvatar
             key={connectionId}
             

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React from 'react'
 
 interface InfoProps{
   boardId:string
@@ -13,9 +13,8 @@ const TabSeparator=()=>{
     )
 }
 
-const Info = ({boardId}:InfoProps) => {
-  const [title, setTitle] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+const Info = ({}:InfoProps) => {
+  
   return (
     <div className='absolute top-2 left-2 bg-white px-1.5 h-12 w-auto flex items-center rounded-md shadow-md'>
       <span className='font-semibold text-xl ml-2 text-black'>

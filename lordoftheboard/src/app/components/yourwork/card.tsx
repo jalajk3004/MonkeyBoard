@@ -1,8 +1,8 @@
 "use client";
-import router from "next/router";
 import React from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 
 type CardProps = {
@@ -45,8 +45,8 @@ const Card = ({ cardData, onDelete }: CardProps) => {
       if (!response.ok) {
         throw new Error("Failed to delete workspace");
       }
-
-      const data = await response.json();
+      
+      
       toast.success('Deleted Successfully!', {
         position: "top-right",
         autoClose: 5000,
@@ -73,7 +73,8 @@ const Card = ({ cardData, onDelete }: CardProps) => {
       <ToastContainer />
     <div className="bg-slate-200 rounded-lg p-4 h-auto w-64 shadow-2xl flex flex-col justify-between transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
       <div className="rounded-lg overflow-hidden">
-        <img
+        <Image
+        
           src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg"
           alt="Card Image"
           />

@@ -5,7 +5,6 @@ import React from "react";
 import { memo } from "react";
 import { LayerType } from "../../../../../types/canvas";
 import { Rectangle } from "./rectangle";
-import { Ellipsis } from "lucide-react";
 import { Ellipse } from "./ellipse";
 import { Text } from "./text";
 import { Note } from "./note";

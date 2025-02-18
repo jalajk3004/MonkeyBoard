@@ -1,13 +1,12 @@
 "use client";
 
-import { ChevronDown, ChevronUp, Globe, Home, Search, User2 } from "lucide-react";
+import {  ChevronUp,  Home,  User2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -24,7 +23,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 
 export function AppSidebar() {
   const { state } = useSidebar();

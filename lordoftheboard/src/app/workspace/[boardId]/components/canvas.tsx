@@ -11,14 +11,12 @@ import { colorToCSS, connectionIdToColor, penPointsToPathLayer, pointerEventToCa
 import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./layer-preview";
-import e from "cors";
 import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tool";
-import { start } from "repl";
 import { findIntersectingLayersWithRectangle } from "@/lib/utils";
 import { Path } from "./path";
 import { useDisableScrollBounce } from "@/hooks/disable-scroll";
-import { useDeleteLayers } from "@/hooks/use-delete";
+
 
 interface CanvasProps {
   boardId: string;
@@ -350,7 +348,7 @@ const Canvas: React.FC<CanvasProps> = ({
     return layerIdColorSelection;
   }, [selections])
 
-  const deleteLayers = useDeleteLayers();
+  
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {

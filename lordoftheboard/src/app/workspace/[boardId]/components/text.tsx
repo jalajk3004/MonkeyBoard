@@ -1,7 +1,7 @@
 
 import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
-import { Color, TextLayer } from "../../../../../types/canvas";
+import {  TextLayer } from "../../../../../types/canvas";
 import { useMutation } from "@liveblocks/react";
 import { cn } from "@/lib/utils";
 import { colorToCSS } from "@/app/utils";

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; 
-import { AppSidebar } from "./components/sidemenu/page";
+import { AppSidebar } from "./components/sidemenu/AppSidebar";
 import AnimatedHeader from "./components/animatedheading/page";
 import Footer from "./components/footer/page";
 

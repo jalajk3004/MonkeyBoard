@@ -1,11 +1,10 @@
 "use client";
 
-import { AppSidebar } from "../components/sidemenu/page";
+import { AppSidebar } from "../components/sidemenu/AppSidebar";
 import AnimatedHeader from "../components/animatedheading/page";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import CreateWorkspace from "../components/whiteboard/createworkspace";
-import YourWork from "../components/yourwork/page";
+import YourWork from "../components/yourwork/YourWork";
 import Footer from "../components/footer/page";
 import JoinWorkspace from "../components/whiteboard/joinworkspace";
 
