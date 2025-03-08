@@ -34,7 +34,7 @@ const Card = ({ cardData, onDelete }: CardProps) => {
     if (!token) return alert("No token found, please log in!");
 
     try {
-      const response = await fetch(`http://localhost:3000/api/data/delete/${cardData.id}`, {
+      const response = await fetch(process.env.DELETECARD || `http://localhost:3000/api/data/delete/${cardData.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
