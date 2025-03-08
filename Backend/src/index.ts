@@ -46,7 +46,7 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
-  console.log(`HTTP & WebSocket Server running on port ${PORT}`);
+  console.log(`HTTP Server running on port ${PORT}`);
 });
 
 export default httpServer;
