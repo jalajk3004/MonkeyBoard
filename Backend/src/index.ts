@@ -15,7 +15,10 @@ app.use("/api/auth", userRouter);
 app.use("/api/data", dataRouter);
 
 app.get("/", (req, res) => {
-  res.send("This is a test web page!");
+  res.send({
+    activeStatus: true,
+    message: "Server is running",
+  });
 });
 
 

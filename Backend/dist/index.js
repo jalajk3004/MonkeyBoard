@@ -17,7 +17,10 @@ app.use(express_1.default.json());
 app.use("/api/auth", authroutes_1.default);
 app.use("/api/data", dataroutes_1.default);
 app.get("/", (req, res) => {
-    res.send("This is a test web page!");
+    res.send({
+        activeStatus: true,
+        message: "Server is running",
+    });
 });
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
@@ -39,6 +42,6 @@ io.on("connection", (socket) => {
 });
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
-    console.log(`HTTP & WebSocket Server running on port ${PORT}`);
+    console.log(`HTTP Server running on port ${PORT}`);
 });
 exports.default = httpServer;
