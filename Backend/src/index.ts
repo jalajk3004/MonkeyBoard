@@ -25,8 +25,6 @@ const httpServer = createServer(app);
 
 
 const PORT = process.env.PORT || 3000;
-httpServer.listen(PORT, () => {
-  console.log(`HTTP Server running on port ${PORT}`);
-});
+
 
 export default httpServer;

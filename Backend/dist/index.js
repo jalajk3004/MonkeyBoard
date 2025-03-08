@@ -23,7 +23,4 @@ app.get("/", (req, res) => {
 });
 const httpServer = (0, http_1.createServer)(app);
 const PORT = process.env.PORT || 3000;
-httpServer.listen(PORT, () => {
-    console.log(`HTTP Server running on port ${PORT}`);
-});
 exports.default = httpServer;
