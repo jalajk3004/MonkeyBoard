@@ -22,7 +22,7 @@ const YourWork = () => {
     }
 
     try {
-      const response = await fetch(process.env.FETCHALL || "http://localhost:3000/api/data/all", {
+      const response = await fetch(process.env.FETCHALL || "https://monkey-board-three.vercel.app/api/data/all", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

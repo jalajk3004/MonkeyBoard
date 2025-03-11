@@ -18,7 +18,7 @@ const Auth = () => {
         e.preventDefault();
         try {
             const { username, email, password } = credential;
-            const response = await fetch(process.env.SIGNIN || "http://localhost:3000/api/auth/register", {
+            const response = await fetch(process.env.SIGNIN || "https://monkey-board-three.vercel.app/api/auth/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Auth = () => {
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch(process.env.LOGIN || 'http://localhost:3000/api/auth/login', {
+            const response = await fetch(process.env.LOGIN || 'https://monkey-board-three.vercel.app/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

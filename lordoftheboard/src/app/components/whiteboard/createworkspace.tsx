@@ -20,7 +20,7 @@ const CreateWorkspace = () => {
     // if (!title.trim()) return alert("Title cannot be empty!");
 
     try {
-      const response = await fetch(process.env.ADDCARD || "http://localhost:3000/api/data/add", {
+      const response = await fetch(process.env.ADDCARD || "https://monkey-board-three.vercel.app/api/data/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
