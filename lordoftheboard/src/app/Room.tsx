@@ -21,7 +21,7 @@ export function Room({ children, roomId }: RoomProps) {
   return (
 
     <LiveblocksProvider
-      publicApiKey="pk_prod_33FJvG28Mdf_OFNJ_zjUeDDYc_e4sd3cm7vXJGJ151odN67ybeBCi19IVd_mK_LP"
+      publicApiKey="pk_prod_ncfQSEmU3ZrLH0VbG4VwxYiUkRm782k2UoTsKtfK_4KPXazECglJR5XL8qBhFXvu"
       throttle={16}
     >
       <RoomProvider
