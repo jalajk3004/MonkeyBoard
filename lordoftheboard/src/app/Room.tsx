@@ -8,7 +8,6 @@ import {
 } from "@liveblocks/react/suspense";
 import { LiveMap, LiveList, LiveObject } from "@liveblocks/client";
 import { Layer } from "../../types/canvas";
-import { SidebarWrapper } from "./components/sidemenu/SidebarWrapper";
 
 interface RoomProps {
   children: ReactNode;
@@ -39,7 +38,7 @@ export function Room({ children, roomId }: RoomProps) {
         }}
       >
         <ClientSideSuspense fallback={<div>Loading…</div>}>
-          <SidebarWrapper>{children}</SidebarWrapper>
+          {children}
         </ClientSideSuspense>
       </RoomProvider>
     </LiveblocksProvider>
