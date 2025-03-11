@@ -6,6 +6,7 @@ import CreateWorkspace from "../components/whiteboard/createworkspace";
 import YourWork from "../components/yourwork/YourWork";
 import Footer from "../components/footer/page";
 import JoinWorkspace from "../components/whiteboard/joinworkspace";
+import { AppSidebar } from "../components/sidemenu/AppSidebar";
 
 
 
@@ -15,7 +16,7 @@ const Page=() => {
   return (
     <div className=" min-h-screen">
       {/* Sidebar */}
-      {/* <AppSidebar /> */}
+      <AppSidebar />
       
       {/* Main Content */}
       <div className="flex-1 relative p-18">

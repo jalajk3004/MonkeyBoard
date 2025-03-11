@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; 
 import AnimatedHeader from "./components/animatedheading/page";
 import Footer from "./components/footer/page";
+import { AppSidebar } from "./components/sidemenu/AppSidebar";
 
 const Page = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const Page = () => {
   return (
     <div className="min-h-screen">
       {/* Sidebar */}
-      {/* <AppSidebar /> */}
+      <AppSidebar />
 
       {/* Main Content */}
       <div className="flex-1 relative p-18">
