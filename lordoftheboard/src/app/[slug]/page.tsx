@@ -1,6 +1,5 @@
 "use client";
 
-import { AppSidebar } from "../components/sidemenu/AppSidebar";
 import AnimatedHeader from "../components/animatedheading/page";
 import { motion } from "framer-motion";
 import CreateWorkspace from "../components/whiteboard/createworkspace";
